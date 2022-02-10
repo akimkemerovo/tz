@@ -44,8 +44,8 @@ class CreateProductRequest extends FormRequest
                 'name' => $this->get('name'),
                 'price' => $this->get('price'),
                 'categoryIds' => $this->get('categoryIds'),
-                'isPublished' => $this->get('isPublished'),
-                'isDeleted' => $this->get('isDeleted'),
+                'is_published' => $this->get('is_published'),
+                'is_deleted' => $this->get('is_deleted'),
             ]
         );
     }
