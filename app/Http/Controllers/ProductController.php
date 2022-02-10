@@ -11,6 +11,7 @@ use App\Repositories\ProductRepository;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Facades\ProductRepositoryService;
 
 class ProductController extends Controller
 {
@@ -22,15 +23,15 @@ class ProductController extends Controller
      */
     protected $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    /*public function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
-    }
+    }*/
 
     public function create(CreateProductRequest $request): JsonResponse
     {
 
-        $newDto = $this->productRepository->insert($request->toDto());
+        $newDto = ProductRepositoryService::insert($request->toDto());
 
         return response()->json(
             (new ProductResponse($newDto))->toArray()
@@ -40,7 +41,7 @@ class ProductController extends Controller
     public function get($productId): JsonResponse
     {
 
-        $product = $this->productRepository->get($productId);
+        $product = ProductRepositoryService::get($productId);
 
         if ($product == null) {
             return response()->json([
@@ -61,7 +62,7 @@ class ProductController extends Controller
         $productId
     ): JsonResponse {
 
-        $product = $this->productRepository->get($productId);
+        $product = ProductRepositoryService::get($productId);
 
         if ($product == null) {
             return response()->json([
@@ -72,7 +73,7 @@ class ProductController extends Controller
 
         $dto = $request->toDto();
         $dto->setId($productId);
-        if (!$this->productRepository->update($dto)) {
+        if (!ProductRepositoryService::update($dto)) {
             return response()->json([
                 'message' => "Product not saved",
                 'code' => 500
@@ -87,7 +88,7 @@ class ProductController extends Controller
     public function delete($productId): JsonResponse
     {
 
-        $product = $this->productRepository->get($productId);
+        $product = ProductRepositoryService::get($productId);
 
         if ($product == null) {
             return response()->json([
@@ -96,7 +97,7 @@ class ProductController extends Controller
             ], 404);
         }
 
-        $this->productRepository->delete($productId);
+        ProductRepositoryService::delete($productId);
 
         return response()->json();
     }
@@ -104,7 +105,7 @@ class ProductController extends Controller
     public function list(Request $request): JsonResponse
     {
 
-        $products = $this->productRepository->list(
+        $products = ProductRepositoryService::list(
             $request->input('name'),
             $request->input('category_name'),
             $request->input('category_id'),
