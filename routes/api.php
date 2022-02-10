@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +19,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('categories')->group(function() {
+    Route::get('/', [CategoryController::class, 'list']);
+    Route::post('/', [CategoryController::class, 'create']);
+    Route::get('/{categoryId}', [CategoryController::class, 'get']);
+    Route::post('/{categoryId}', [CategoryController::class, 'update']);
+    Route::delete('/{categoryId}', [CategoryController::class, 'delete']);
+
+});
+
+Route::prefix('products')->group(function() {
+    Route::get('/', [ProductController::class, 'list']);
+    Route::post('/', [ProductController::class, 'create']);
+    Route::get('/{productId}', [ProductController::class, 'get']);
+    Route::post('/{productId}', [ProductController::class, 'update']);
+    Route::delete('/{productId}', [ProductController::class, 'delete']);
+
 });
