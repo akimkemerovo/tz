@@ -1,0 +1,62 @@
+POST http://localhost:8000/api/categories
+Accept:application/json
+Content-Type: text/json
+
+{
+    "name": "test category"
+}
+
+###
+
+PUT http://localhost:8000/api/categories/1
+Accept:application/json
+Content-Type: text/json
+
+{
+    "name": "test category updated"
+}
+
+###
+
+GET http://localhost:8000/api/categories/1
+Accept:application/json
+
+###
+
+
+GET http://localhost:8000/api/categories/
+Accept:application/json
+
+###
+
+DELETE http://localhost:8000/api/categories/1
+Accept:application/json
+Content-Type: text/json
+
+###
+
+POST http://localhost:8000/api/products
+Accept:application/json
+Content-Type: text/json
+
+{
+    "name": "test product",
+    "price": 10.5,
+    "is_published": true,
+    "is_deleted": false,
+    "categoryIds": [1]
+
+}
+
+###
+
+GET http://localhost:8000/api/products/1
+Accept:application/json
+
+###
+
+
+GET http://localhost:8000/api/products
+Accept:application/json
+
+###
