@@ -25,7 +25,7 @@ Route::prefix('categories')->group(function() {
     Route::get('/', [CategoryController::class, 'list']);
     Route::post('/', [CategoryController::class, 'create']);
     Route::get('/{categoryId}', [CategoryController::class, 'get']);
-    Route::post('/{categoryId}', [CategoryController::class, 'update']);
+    Route::put('/{categoryId}', [CategoryController::class, 'update']);
     Route::delete('/{categoryId}', [CategoryController::class, 'delete']);
 
 });
@@ -34,7 +34,7 @@ Route::prefix('products')->group(function() {
     Route::get('/', [ProductController::class, 'list']);
     Route::post('/', [ProductController::class, 'create']);
     Route::get('/{productId}', [ProductController::class, 'get']);
-    Route::post('/{productId}', [ProductController::class, 'update']);
+    Route::put('/{productId}', [ProductController::class, 'update']);
     Route::delete('/{productId}', [ProductController::class, 'delete']);
 
 });
